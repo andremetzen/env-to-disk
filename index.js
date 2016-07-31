@@ -9,6 +9,7 @@ if(!process.env.VARIABLE_LIST) {
 }
 
 let envs = process.env.VARIABLE_LIST.split(";");
+let separator = process.env.SEPARATOR || "|";
 
 envs.forEach((name) => {
 	name = name.toUpperCase();
@@ -18,6 +19,11 @@ envs.forEach((name) => {
 		return;
 	}
 
-	var [path, encoding, data] = process.env[name].split(":");
-	fs.writeFile(path, new Buffer(data, encoding));
+	var [path, encoding, data] = process.env[name].split(separator);
+	console.log(path, encoding, data);
+
+	if(path && encoding && data)
+		fs.writeFile(path, new Buffer(data, encoding));
+	else
+		console.error("Missing params\n", "path", path, "\n", "encoding", encoding, "\n", "data", data );
 });
