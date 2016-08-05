@@ -1,7 +1,7 @@
 {
   "name": "env-to-disk",
   "private": true,
-  "description": "",
+  "description": "Docker image that writes environment variables to disk",
   "main": "index.js",
   "repository": {
     "type": "git",
