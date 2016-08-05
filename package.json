@@ -13,6 +13,6 @@
   },
   "homepage": "https://github.com/andremetzen/env-to-disk#readme",
   "dependencies": {
-    "mkpath": "^1.0.0"
+    "mkpath": "~1.0.0"
   }
 }
