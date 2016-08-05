@@ -20,15 +20,17 @@ envs.forEach((name) => {
 
 	let [path, encoding, data] = process.env[name].split(separator);
 
-	if (path && encoding && data) {
-		let dir = path.substring(0, path.lastIndexOf("/") + 1);
-		mkpath(dir, function(err) {
-			if (err) throw err;
-			fs.writeFile(path, new Buffer(data, encoding), function(err, done) {
-				if (err) throw err;
-				console.log('Succefully written: >>>\n', new Buffer(data, encoding).toString(), "\n<<<\nto " + path)
-			});
-		});
-	} else
+	if (!path || !encoding || !data) {
 		console.error("Missing params\n", "path", path, "\n", "encoding", encoding, "\n", "data", data);
+		return;
+	}
+
+	let dir = path.substring(0, path.lastIndexOf("/") + 1);
+	mkpath(dir, function(err) {
+		if (err) throw err;
+		fs.writeFile(path, new Buffer(data, encoding), function(err, done) {
+			if (err) throw err;
+			console.log('Succefully written: >>>\n', new Buffer(data, encoding).toString(), "\n<<<\nto " + path)
+		});
+	});
 });
